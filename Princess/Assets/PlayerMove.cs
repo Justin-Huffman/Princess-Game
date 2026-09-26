@@ -90,6 +90,11 @@ public class PlayerMove : MonoBehaviour
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
+
+        if (OnSlope())
+        {
+            rb.AddForce(Vector3.down * 30, ForceMode.Force);
+        }
     }
 
     private void FixedUpdate()
@@ -171,7 +176,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // check if desiredMoveSpeed has changed drastically
-        if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
+        if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 8f && moveSpeed != 0)
         {
             StopAllCoroutines();
             StartCoroutine(SmoothlyLerpMoveSpeed());
