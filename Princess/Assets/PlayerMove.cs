@@ -42,6 +42,9 @@ public class PlayerMove : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
+    [Header("References")]
+    public Climbing climbingScript;
+
     public Transform orientation;
 
     float horizontalInput;
@@ -208,6 +211,8 @@ public class PlayerMove : MonoBehaviour
 
     private void MovePlayer()
     {
+        if(climbingScript.exitingWall) return;
+        
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
